@@ -19,6 +19,10 @@ ms.date: 02/28/2019
 
 # BitLocker: Use BitLocker Drive Encryption Tools to manage BitLocker
 
+<!--
+The information on this page is doubled with page “BitLocker basic deployment”!
+-->
+
 **Applies to**
 -   Windows 10
 
@@ -239,7 +243,6 @@ Windows PowerShell cmdlets provide a new way for administrators to use when work
 <p>-MountPoint</p>
 <p>-Password</p>
 <p>-RecoveryKeyPath</p>
-<p>-RecoveryPassword</p>
 <p>-RecoveryPassword</p>
 <p>-WhatIf</p></td>
 </tr>

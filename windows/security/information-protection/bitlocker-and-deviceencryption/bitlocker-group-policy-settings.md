@@ -452,6 +452,8 @@ To change the PIN or password, the user must be able to provide the current PIN 
 
 This policy controls how non-TPM based systems utilize the password protector. Used in conjunction with the **Password must meet complexity requirements** policy, this policy allows administrators to require password length and complexity for using the password protector. By default, passwords must be eight characters in length. Complexity configuration options determine how important domain connectivity is for the client. For the strongest password security, administrators should choose **Require password complexity** because it requires domain connectivity, and it requires that the BitLocker password meets the same password complexity requirements as domain sign-in passwords.
 
+<!-- Why is this option not available if a TPM is used? Advanced security would be provided -->
+
 <table>
 <colgroup>
 <col width="50%" />

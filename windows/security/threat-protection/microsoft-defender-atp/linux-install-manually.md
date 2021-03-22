@@ -25,7 +25,6 @@ ms.technology: mde
 
 [!INCLUDE [Microsoft 365 Defender rebranding](../../includes/microsoft-defender.md)]
 
-
 **Applies to:**
 - [Microsoft Defender for Endpoint](https://go.microsoft.com/fwlink/p/?linkid=2154037)
 - [Microsoft 365 Defender](https://go.microsoft.com/fwlink/?linkid=2118804)
@@ -150,25 +149,14 @@ In order to preview new features and provide early feedback, it is recommended t
     In the below command, replace *[distro]* and *[version]* with the information you've identified:
 
     ```bash
-    curl -o microsoft.list https://packages.microsoft.com/config/[distro]/[version]/[channel].list
+    curl -sSL https://packages.microsoft.com/config/[distro]/[version]/[channel].list | sudo tee /etc/apt/sources.list.d/microsoft-[channel].list
     ```
 
     For example, if you are running Ubuntu 18.04 and wish to deploy MDE for Linux from the *prod* channel:
 
     ```bash
-    curl -o microsoft.list https://packages.microsoft.com/config/ubuntu/18.04/prod.list
+    curl -sSL https://packages.microsoft.com/config/ubuntu/18.04/prod.list | sudo tee /etc/apt/sources.list.d/microsoft-prod.list
     ```
-
-- Install the repository configuration:
-
-    ```bash
-    sudo mv ./microsoft.list /etc/apt/sources.list.d/microsoft-[channel].list
-    ```
-    For example, if you chose *prod* channel:
-    
-    ```bash
-    sudo mv ./microsoft.list /etc/apt/sources.list.d/microsoft-prod.list
-    ```   
 
 - Install the `gpg` package if not already installed:
 
@@ -181,7 +169,7 @@ In order to preview new features and provide early feedback, it is recommended t
 - Install the Microsoft GPG public key:
 
     ```bash
-    curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+    curl -sSL https://packages.microsoft.com/keys/microsoft.asc | sudo tee /etc/apt/trusted.gpg.d/microsoft.asc
     ```
 
 - Install the https driver if it's not already present:
@@ -210,12 +198,14 @@ In order to preview new features and provide early feedback, it is recommended t
     # list all repositories
     yum repolist
     ```
+
     ```Output
     ...
     packages-microsoft-com-prod               packages-microsoft-com-prod        316
     packages-microsoft-com-prod-insiders-fast packages-microsoft-com-prod-ins      2
     ...
     ```
+
     ```bash
     # install the package from the production repository
     sudo yum --enablerepo=packages-microsoft-com-prod install mdatp
@@ -240,6 +230,7 @@ In order to preview new features and provide early feedback, it is recommended t
     XX | packages-microsoft-com-prod | microsoft-prod | ...
     ...
     ```
+
     ```bash
     sudo zypper install packages-microsoft-com-prod:mdatp
     ```
@@ -255,10 +246,12 @@ In order to preview new features and provide early feedback, it is recommended t
     ```bash
     cat /etc/apt/sources.list.d/*
     ```
+
     ```Output
     deb [arch=arm64,armhf,amd64] https://packages.microsoft.com/ubuntu/18.04/prod insiders-fast main
     deb [arch=amd64] https://packages.microsoft.com/ubuntu/18.04/prod bionic main
     ```
+
     ```bash
     sudo apt -t bionic install mdatp
     ```
@@ -288,11 +281,11 @@ Download the onboarding package from Microsoft Defender Security Center:
     ```bash
     unzip WindowsDefenderATPOnboardingPackage.zip
     ```
+
     ```Output
     Archive:  WindowsDefenderATPOnboardingPackage.zip
     inflating: MicrosoftDefenderATPOnboardingLinuxServer.py
     ```
-
 
 ## Client configuration
 
